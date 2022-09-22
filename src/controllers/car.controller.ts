@@ -1,13 +1,11 @@
 import { Request, Response } from 'express';
-import Car from '../models/car.model';
 import CarService from '../services/car.service';
 
 class CarsController {
   private _service: CarService;
-  private _model = new Car();
 
-  constructor() {
-    this._service = new CarService(this._model);
+  constructor(service: CarService) {
+    this._service = service;
   }
 
   public async create(req: Request, res: Response) {

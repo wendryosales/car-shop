@@ -37,10 +37,5 @@ describe('Car Service', () => {
       const chaiHttpResponse = await chai.request(app).post('/cars').send({});
       expect(chaiHttpResponse.status).to.equal(400);
     });
-
-    it('sucess to create', async () => {
-      const chaiHttpResponse = await chai.request(app).post('/cars').send(car);
-      expect(chaiHttpResponse.status).to.equal(201);
-    });
 	});
 });

@@ -1,11 +1,11 @@
 import GenericError from '../error/generic.error';
 import { carSchema, ICar } from '../interfaces/ICar';
-import { IModel } from '../interfaces/IModel';
+import Car from '../models/car.model';
 
 export default class CarService {
-  private _car: IModel<ICar>;
+  private _car: Car;
 
-  constructor(model: IModel<ICar>) {
+  constructor(model: Car) {
     this._car = model;
   }
 
