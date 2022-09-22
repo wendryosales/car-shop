@@ -18,4 +18,9 @@ export default class CarService {
     const createdCar = await this._car.create(parsed.data);
     return createdCar;
   }
+
+  public async findAll(): Promise<ICar[]> {
+    const cars = await this._car.read();
+    return cars || [];
+  }
 }

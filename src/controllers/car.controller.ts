@@ -12,6 +12,11 @@ class CarsController {
     const createdCar = await this._service.create(req.body);
     return res.status(201).json(createdCar);
   }
+
+  public async findAll(req: Request, res: Response) {
+    const cars = await this._service.findAll();
+    return res.status(200).json(cars);
+  }
 }
 
 export default CarsController;
