@@ -14,11 +14,11 @@ class ErrorHandling {
     
     if (err.name === this._name) {
       return res.status(err.code).json({
-        message: err.message,
+        error: err.message,
       });
     }
     return res.status(500).json({
-      message: err.message,
+      error: err.message,
     });
   }
 }

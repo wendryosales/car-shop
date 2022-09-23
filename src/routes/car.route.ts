@@ -13,4 +13,6 @@ route.post('/', (req, res) => controller.create(req, res));
 
 route.get('/', (req, res) => controller.findAll(req, res));
 
+route.get('/:id', (req, res) => controller.findOne(req, res));
+
 export default route;

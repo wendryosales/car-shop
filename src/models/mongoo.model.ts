@@ -1,4 +1,5 @@
-import { Model, UpdateQuery } from 'mongoose';
+import { isValidObjectId, Model, UpdateQuery } from 'mongoose';
+import GenericError from '../error/generic.error';
 import { IModel } from '../interfaces/IModel';
 
 class MongoModel<T> implements IModel<T> {
@@ -17,6 +18,9 @@ class MongoModel<T> implements IModel<T> {
   }
 
   public async readOne(_id: string): Promise<T | null> {
+    if (!isValidObjectId(_id)) {
+      throw new GenericError('Id must have 24 hexadecimal characters', 400);
+    }
     return this._model.findById(_id);
   }
 

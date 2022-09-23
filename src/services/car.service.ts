@@ -23,4 +23,12 @@ export default class CarService {
     const cars = await this._car.read();
     return cars || [];
   }
+
+  public async findOne(id: string): Promise<ICar> {
+    const car = await this._car.readOne(id);
+    if (!car) {
+      throw new GenericError('Object not found', 404);
+    }
+    return car;
+  }
 }

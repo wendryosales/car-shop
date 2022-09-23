@@ -17,6 +17,11 @@ class CarsController {
     const cars = await this._service.findAll();
     return res.status(200).json(cars);
   }
+
+  public async findOne(req: Request, res: Response) {
+    const car = await this._service.findOne(req.params.id);
+    return res.status(200).json(car);
+  }
 }
 
 export default CarsController;
