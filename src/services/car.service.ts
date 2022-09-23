@@ -2,6 +2,9 @@ import GenericError from '../error/generic.error';
 import { carSchema, ICar } from '../interfaces/ICar';
 import Car from '../models/car.model';
 
+const NOT_FOUND = 'Object not found';
+const BAD_REQUEST = 'Bad Request';
+
 export default class CarService {
   private _car: Car;
 
@@ -13,7 +16,7 @@ export default class CarService {
     const parsed = carSchema.safeParse(obj);
     
     if (!parsed.success) {
-      throw new GenericError('Bad Request', 400);
+      throw new GenericError(BAD_REQUEST, 400);
     }
     const createdCar = await this._car.create(parsed.data);
     return createdCar;
@@ -27,7 +30,7 @@ export default class CarService {
   public async findOne(id: string): Promise<ICar> {
     const car = await this._car.readOne(id);
     if (!car) {
-      throw new GenericError('Object not found', 404);
+      throw new GenericError(NOT_FOUND, 404);
     }
     return car;
   }
@@ -36,12 +39,20 @@ export default class CarService {
     const parsed = carSchema.safeParse(obj);
     
     if (!parsed.success) {
-      throw new GenericError('Bad Request', 400);
+      throw new GenericError(BAD_REQUEST, 400);
     }
     const updatedCar = await this._car.update(id, parsed.data);
     if (!updatedCar) {
-      throw new GenericError('Object not found', 404);
+      throw new GenericError(NOT_FOUND, 404);
     }
     return updatedCar;
+  }
+
+  public async delete(id: string): Promise<ICar> {
+    const deletedCar = await this._car.delete(id);
+    if (!deletedCar) {
+      throw new GenericError(NOT_FOUND, 404);
+    }
+    return deletedCar;
   }
 }

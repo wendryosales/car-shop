@@ -34,6 +34,9 @@ class MongoModel<T> implements IModel<T> {
   }
 
   public async delete(_id: string): Promise<T | null> {
+    if (!isValidObjectId(_id)) {
+      throw new GenericError(ERROR_MESSAGE, 400);
+    }
     return this._model.findByIdAndDelete(_id);
   }
 }

@@ -17,4 +17,6 @@ route.get('/:id', (req, res) => controller.findOne(req, res));
 
 route.put('/:id', (req, res) => controller.update(req, res));
 
+route.delete('/:id', (req, res) => controller.delete(req, res));
+
 export default route;
