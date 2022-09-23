@@ -22,6 +22,11 @@ class CarsController {
     const car = await this._service.findOne(req.params.id);
     return res.status(200).json(car);
   }
+
+  public async update(req: Request, res: Response) {
+    const updatedCar = await this._service.update(req.params.id, req.body);
+    return res.status(200).json(updatedCar);
+  }
 }
 
 export default CarsController;

@@ -31,4 +31,17 @@ export default class CarService {
     }
     return car;
   }
+
+  public async update(id: string, obj: ICar): Promise<ICar> {
+    const parsed = carSchema.safeParse(obj);
+    
+    if (!parsed.success) {
+      throw new GenericError('Bad Request', 400);
+    }
+    const updatedCar = await this._car.update(id, parsed.data);
+    if (!updatedCar) {
+      throw new GenericError('Object not found', 404);
+    }
+    return updatedCar;
+  }
 }
